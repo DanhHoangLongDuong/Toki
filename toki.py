@@ -1,6 +1,6 @@
 import sys
 import time
-
+import pygame
 
 
 def focusTime(focus):
@@ -54,6 +54,11 @@ def restTime(rest):
         time.sleep(1)
         rest -= 1
 
+def sound():
+    pygame.mixer.init()
+    mysound = pygame.mixer.Sound("finishNoise.mp3")
+    mysound.play()
+    mysound.set_volume(0.5)
     
 
 print("""\
@@ -68,16 +73,26 @@ print("""\
 count = 0
 focus = int(input("Enter focus time (in second): "))
 rest = int(input("Enter resting time: "))
+confirmation = input("Press y to begin:")
+if confirmation != "y":
+    print("Cancelling...")
+    time.sleep(1)
+    sys.exit(0)
+else:
+    clear(3)
 
-while True: 
+while True:
     focusTime(focus)
     clear(8)
+    sound()
     restTime(rest)
     count += 1
     confirm = input("Continue? (Y/N)")
     sys.stdout.flush()
     if confirm == "N" or confirm == "n":
         print(f"you completed {count} cycles!")
+        time.sleep(1)
+        print(f"{focus} second focus time and {rest} second rest time per cycle")
         break
     elif confirm == "Y" or confirm == "y":
         clear(20)
