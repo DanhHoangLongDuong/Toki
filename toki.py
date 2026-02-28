@@ -56,10 +56,25 @@ def restTime(rest):
 
 def sound():
     pygame.mixer.init()
-    mysound = pygame.mixer.Sound("finishNoise.mp3")
+    mysound = pygame.mixer.Sound("Sound/finishNoise.mp3")
     mysound.play()
     mysound.set_volume(0.5)
     
+def jazz(music):
+    if music == "Y" or music == "y":
+        pygame.mixer.init()
+        jazzy = pygame.mixer.Sound("Sound/jazz.mp3")
+        jazzy.play(-1)
+        pygame.mixer.music.set_volume(0.7)
+
+def rainSound(rain):
+    if rain == "Y" or rain == "y":
+        pygame.mixer.init()
+        rainSound = pygame.mixer.Sound("Sound/rain.mp3")
+        rainSound.play(-1)
+        pygame.mixer.music.set_volume(0.7)
+
+
 
 print("""\
   _______ ____  _  _______ 
@@ -73,6 +88,10 @@ print("""\
 count = 0
 focus = int(input("Enter focus time (in second): "))
 rest = int(input("Enter resting time: "))
+music = input("Do you want jazz music? (Y/n): ")
+rain = input("Do you want rain ambience noise? (Y/n): ")
+
+
 confirmation = input("Press y to begin:")
 if confirmation != "y":
     print("Cancelling...")
@@ -80,6 +99,9 @@ if confirmation != "y":
     sys.exit(0)
 else:
     clear(3)
+
+jazz(music)
+rainSound(rain)
 
 while True:
     focusTime(focus)
