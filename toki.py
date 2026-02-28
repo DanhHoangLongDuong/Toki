@@ -1,7 +1,8 @@
 import sys
 import time
 import pygame
-
+from openpyxl import load_workbook
+from datetime import date
 
 def focusTime(focus):
     print("""
@@ -75,6 +76,21 @@ def rainSound(rain):
         pygame.mixer.music.set_volume(0.7)
 
 
+def log(date, cycles, focusTime):
+    wb = load_workbook("log.xlsx")
+    ws = wb.active
+
+    Row = ws.max_row
+    Row += 1
+    ws.cell(row=Row, column=1).value = date
+    ws.cell(row=Row, column=2).value = cycles
+    ws.cell(row=Row, column =3).value = focusTime
+
+    wb.save("log.xlsx")
+    
+def timeConverter(timeConvert):
+    return time.strftime("%H:%M:%S", time.gmtime(timeConvert))
+
 
 print("""\
   _______ ____  _  _______ 
@@ -118,3 +134,11 @@ while True:
         break
     elif confirm == "Y" or confirm == "y":
         clear(20)
+
+timeConvert = count * focus
+focusLog = timeConverter(timeConvert)
+cycleLog = count
+dateLog = date.today()
+
+log(dateLog, cycleLog, focusLog)
+
