@@ -66,14 +66,14 @@ def jazz(music):
         pygame.mixer.init()
         jazzy = pygame.mixer.Sound("Sound/jazz.mp3")
         jazzy.play(-1)
-        pygame.mixer.music.set_volume(0.7)
+        pygame.mixer.music.set_volume(0.4)
 
 def rainSound(rain):
     if rain == "Y" or rain == "y":
         pygame.mixer.init()
         rainSound = pygame.mixer.Sound("Sound/rain.mp3")
         rainSound.play(-1)
-        pygame.mixer.music.set_volume(0.7)
+        pygame.mixer.music.set_volume(0.4)
 
 
 def log(date, cycles, focusTime):
@@ -90,7 +90,6 @@ def log(date, cycles, focusTime):
     
 def timeConverter(timeConvert):
     return time.strftime("%H:%M:%S", time.gmtime(timeConvert))
-
 
 print("""\
   _______ ____  _  _______ 
